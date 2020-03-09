@@ -19,19 +19,21 @@
                 margin-bottom: 50px;
                 margin-top:20px;
                 height: 100px;
-            
             }
-
             div.col-8 {
                 background-color: lightgoldenrodyellow;
                 height: 1000px;
             }
-
             div.col-4 {
                 background-color: salmon;
                 height: 300px;
                 text-align: center;
                 font-family: 'Acme', sans-serif;
+            }
+            button#movieBtn {
+                height: 40px;
+                padding-bottom: 10px;
+                margin-right: 5px;
             }
 
         </style>
@@ -47,18 +49,21 @@
 
             <!-- Gif picture + Search box -->
             <div class="row">
-              <div class="col-8"></div>
+
+              <div id="gif" class="col-8"></div>
+
               <div class="col-4">
                   <h2>Add a movie!</h2>
+
                   <!-- Adding search box -->
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="inputGroup-sizing-default">Movie</span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input id="searchbox" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                   </div>
                   <!-- Adding Search Button -->
-                  <button type="button" class="btn btn-dark">Search</button>
+                  <button id ="search-btn" type="button" class="btn btn-dark">Search</button>
               </div>
             </div>
 
