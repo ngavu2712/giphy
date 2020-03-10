@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 $('button').on('click' , function () { 
     var movie = $(this).attr("data-movie")
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
 
     $.ajax({
         url: queryURL,
@@ -59,12 +59,14 @@ $('button').on('click' , function () {
 
         var movieResult = response.data;    //Creating movieResult variable to store the data from the response call
 
+        
+        
         for (var i= 0; i < movieResult.length ; i++) {
         
             var movieDiv = $('<div>');
             var p = $('<p>');
 
-            $('p').append(movieResult[i].rating);
+            $(p).append(movieResult[i].rating);
             
             var movieGif = $('<img>');
             $(movieGif).attr("src",movieResult[i].images.fixed_height.url);
