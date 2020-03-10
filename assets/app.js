@@ -21,26 +21,43 @@ Animation of GIF
 
 $(document).ready(function() {
 
-    var topics = [];
+//JS and jQuery Work
 
+    var topics = []; //Create an empty array
+    var buttonCount = 0;
 
-    $('#search-btn').on('click', function (event) {
-        event.preventDefault();
+    //SEARCH CLICK event 
+    $('#search-btn').on('click', function (event) {         
+        event.preventDefault(); //prevent the browser from reloading
 
-        var searchInput = $('#searchbox').val().trim(); //retrieve text input form the user
-        topics.push(searchInput); //push it to the array 
+        var searchInput = $('#searchbox').val().trim(); //retrieve text input from the user
+        topics.unshift(searchInput); //Add new item to the beginning of the array
+    
         console.log(topics);
         $('#searchbox').val(''); //clear the search box
 
+       $('#popup-btn').empty(); //empty the popup-btn div before looping the array, or else for loop will loop over the entire array
+
         for (var i = 0 ; i < topics.length ; i++ ) {    //Loop through the array and add button to each item in the array
+            var button = $('<button type="button" id="movieBtn"class="btn btn-info">' + topics[i]+ '</button>');
             console.log(topics[i]);
-        var button = $('<button type="button" id="movieBtn" class="btn btn-info">' + topics[i] + '</button>');
-        $('#popup-btn').append(button);
-        } 
+            $('#popup-btn').append(button);
+        }
 
     }); 
 
+//Retrieve data using AJAX and API + BUTTON CLICK EVENT
 
+$('button').on('click' , function () { 
+
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl";
+
+})
+
+
+
+    
+  
 
 
 
