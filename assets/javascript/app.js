@@ -53,12 +53,12 @@ $(document).ready(function() {
         //$('#movieBtn').on('click' , function () { 
         //console.log('movieBtn')
     
-        $('#gif-display').empty();    
+        $('#gif-display').empty(); //clear the first movie gifs, then display the next movie gif
 
-        var movie = $(this).attr("data-movie")
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
+        var movie = $(this).attr("data-movie") //Create a variable to store the buttons with data-movie attribute
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
 
-            $.ajax({
+            $.ajax({            
                 url: queryURL,
                 method: "GET"
             })
@@ -70,28 +70,29 @@ $(document).ready(function() {
         
                 for (var i= 0; i < movieResult.length ; i++) {  //Creating a loop for response data from GIPHY
         
-                var movieDiv = $('<div>');
-                var p = $('<p>');
+                var movieDiv = $('<div>');  //Creating a new div and store the info inside movidDiv variable
+                var p = $('<p>');           //Creating a paragraph tag to display the rating
 
                 $(p).append('Rating:' + ' ' + movieResult[i].rating);
             
-                var movieGif = $('<img class= "gif_click">');
-                $(movieGif).attr("src", movieResult[i].images.fixed_height_still.url); //fixed_height_still.url make the gif appear to be still
-                $(movieGif).attr({"data-animate" : movieResult[i].images.fixed_height.url}); //fixed_height.url is animated gif
-                $(movieGif).attr({'data-state': 'still'});
-                $(movieGif).attr({"data-still": movieResult[i].images.fixed_height_still.url});
+                var movieGif = $('<img class= "gif_click">');   //Creating <img> tag and store the gifs in movieGif variable
+
+                $(movieGif).attr("src", movieResult[i].images.fixed_height_still.url);          //Provide url attribute to the img fixed_height_still.url make the gif appear to be still
+                $(movieGif).attr({"data-animate" : movieResult[i].images.fixed_height.url});    //fixed_height.url is animated gif
+                $(movieGif).attr({'data-state': 'still'});                                      //Provide data-sate attribute to the img
+                $(movieGif).attr({"data-still": movieResult[i].images.fixed_height_still.url}); //Provide data-still attribute to the img. 
 
 
-                $(movieDiv).append(movieGif);
-                $(movieDiv).append(p)
+                $(movieDiv).append(movieGif);       //Append the movieGif variable to movieDiv
+                $(movieDiv).append(p)               //Append p to movieDiv      
 
-                $('#gif-display').prepend(movieDiv);
+                $('#gif-display').prepend(movieDiv); //Append movieDiv into DOM #gif-display 
 
                 }
-            }) 
-    }) 
+                }) 
+        }) 
 
-$('img').on('click' , function() {
+$(document.body).on('click' , '.gif_click' , function() {
     console.log('img')
 
     var state = $(this).attr("data-state");
