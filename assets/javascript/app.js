@@ -47,11 +47,13 @@ $(document).ready(function() {
 
 //Retrieve data using AJAX and API + BUTTON CLICK EVENT
 
-    $('button').on('click' , function () { 
-    //$('#movieBtn').on('click' , function () { 
+    $(document.body).on('click', '#movieBtn' , function () { 
+
+
+        //$('#movieBtn').on('click' , function () { 
         //console.log('movieBtn')
     
-        //$('#gif-display').empty();    
+        $('#gif-display').empty();    
         for (var j= 0; j < topics.length ; j++) {
        // var movie = $(this).attr("data-movie")
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics[j] + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
@@ -87,8 +89,8 @@ $(document).ready(function() {
 
                 }
             })
-        }
-    })
+        } 
+    }) 
 
 $('img').on('click' , function() {
     console.log('img')

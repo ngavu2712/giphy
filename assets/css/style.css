@@ -1,0 +1,27 @@
+div#popup-btn {
+    background-color: rgba(173, 216, 230, 0.5);
+    margin-bottom: 50px;
+    margin-top:20px;
+    height: 100px;
+}
+div.col-8 {
+    height: 2400px;
+}
+div.col-4 {
+    border: 2px dashed lightgoldenrodyellow;
+    height: 300px;
+    text-align: center;
+    font-family: 'Acme', sans-serif;
+    padding-top:70px;
+}
+button#movieBtn {
+    height: 40px;
+    padding-bottom: 10px;
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 425px) {
+    div.col-4 {
+        justify-content: space-evenly;
+    }
+}
