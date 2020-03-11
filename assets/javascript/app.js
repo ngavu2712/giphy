@@ -54,9 +54,9 @@ $(document).ready(function() {
         //console.log('movieBtn')
     
         $('#gif-display').empty();    
-        for (var j= 0; j < topics.length ; j++) {
-       // var movie = $(this).attr("data-movie")
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics[j] + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
+
+        var movie = $(this).attr("data-movie")
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
 
             $.ajax({
                 url: queryURL,
@@ -88,8 +88,7 @@ $(document).ready(function() {
                 $('#gif-display').prepend(movieDiv);
 
                 }
-            })
-        } 
+            }) 
     }) 
 
 $('img').on('click' , function() {
