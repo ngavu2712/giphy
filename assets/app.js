@@ -24,60 +24,70 @@ $(document).ready(function() {
 //JS and jQuery Work
 
     var topics = []; //Create an empty array
-    var buttonCount = 0;
 
     //SEARCH CLICK event 
     $('#search-btn').on('click', function (event) {         
         event.preventDefault(); //prevent the browser from reloading
 
         var searchInput = $('#searchbox').val().trim(); //retrieve text input from the user
+
         topics.unshift(searchInput); //Add new item to the beginning of the array
     
-        console.log(topics);
+
         $('#searchbox').val(''); //clear the search box
 
-       $('#popup-btn').empty(); //empty the popup-btn div before looping the array, or else for loop will loop over the entire array
+        $('#popup-btn').empty(); //empty the popup-btn div before looping the array, or else for loop will loop over the entire array
 
         for (var i = 0 ; i < topics.length ; i++ ) {    //Loop through the array and add button to each item in the array
             var button = $('<button data-movie="'+ topics[i] +'"type="button" id="movieBtn"class="btn btn-info">' + topics[i]+ '</button>');
-            console.log(topics[i]);
             $('#popup-btn').append(button);
+            
         }
-    }); 
+        }); 
 
 //Retrieve data using AJAX and API + BUTTON CLICK EVENT
 
-$('button').on('click' , function () { 
-    var movie = $(this).attr("data-movie")
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + movie + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
+    $('button').on('click' , function () { 
+        //console.log('movieBtn')
+    
+        //$('#gif-display').empty();    
+        for (var j= 0; j < topics.length ; j++) {
+        //var movie = $(this).attr("data-movie")
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topics[j] + "&api_key=HD8aqxdjXpLQMq0OBrTB0LWnEtvhgUZl&limit=10"; //SET &limit=10 at the end of the API Key
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function(response){
-        console.log(response);
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function(response){
+            console.log(response);
 
-        var movieResult = response.data;    //Creating movieResult variable to store the data from the response call
-
+            var movieResult = response.data;    //Creating movieResult variable to store the data from the response call
         
+                for (var i= 0; i < movieResult.length ; i++) {  //Creating a loop for response data from GIPHY
         
-        for (var i= 0; i < movieResult.length ; i++) {
-        
-            var movieDiv = $('<div>');
-            var p = $('<p>');
+                var movieDiv = $('<div>');
+                var p = $('<p>');
 
-            $(p).append(movieResult[i].rating);
+                $(p).append('Rating:' + ' ' + movieResult[i].rating);
             
-            var movieGif = $('<img>');
-            $(movieGif).attr("src",movieResult[i].images.fixed_height.url);
+                var movieGif = $('<img id="gif_click">');
+                $(movieGif).attr("src", movieResult[i].images.fixed_height_still.url); //fixed_height_still.url make the gif appear to be still
+                //$(movieGif).attr("data-animate", movieResult[i].images.fixed_height.url); //fixed_height.url is animated gif
+                //$(movieGif).attr("data-state","still");
+                // $(movieGif).attr("data-still", movieResult[i],images.fixed_height_still.url);
 
-            $(movieDiv).append(movieGif);
-            $(movieDiv).append(p)
 
-            $('#gif').prepend(movieDiv);
+                $(movieDiv).append(movieGif);
+                $(movieDiv).append(p)
+
+                $('#gif-display').prepend(movieDiv);
+
+                }
+            })
         }
     })
-})
+
 
 
 
